@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int firstindex(vector<int>&nums,int target,int s,int e){
+        int mid=s+(e-s)/2;
+        int mini=-1;
+        while(s<=e){
+            if(nums[mid]==target){
+                mini=mid;
+            }
+            if(nums[mid]>=target){
+                e=mid-1;
+            }
+           else {
+                s=mid+1;
+            }
+            mid=s+(e-s)/2;
+        }
+        return mini;
+    }
+    int lastindex(vector<int>&nums,int target,int s,int e){
+        if(s==-1)s=0;
+        int mid=s+(e-s)/2;
+        int maxi=-1;
+        while(s<=e){
+            if(nums[mid]==target){
+                maxi=mid;
+            }
+            if(nums[mid]<=target){
+                s=mid+1;
+            }
+           else {
+                e=mid-1;
+            }
+            mid=s+(e-s)/2;
+        }
+        return maxi;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int>ans(2,-1);
+        
+        ans[0]=firstindex(nums,target,0,nums.size()-1);
+        ans[1]=lastindex(nums,target,ans[0],nums.size()-1);
+      
+    return ans;
+    }
+};
